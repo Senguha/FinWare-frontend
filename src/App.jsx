@@ -1,12 +1,13 @@
 import { useState } from 'react'
 
 import './App.css'
+import Dummy from './components/dummy'
 
 function App() {
 
   return (
     <>
-      <h1>Hello!</h1>
+      <Dummy/>
     </>
   )
 }
