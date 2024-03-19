@@ -1,39 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableContainer from '@mui/material/TableContainer';
+import React, { useState, useEffect } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableContainer from "@mui/material/TableContainer";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 function Dummy() {
-    
-    const [movies, setMovies] = useState([]);
+  const [tableData, setTableData] = useState([]);
 
-    const fetchMovies = () => {
-      fetch('https://dummyapi.online/api/movies')
-        .then(response => response.json())
-        .then(data => setMovies(data))
-        .catch(error => console.error('Error:', error));
-    };
-    useEffect(() => {
-      fetchMovies();
-    }, []);
-  
-    return (
-      <div className="flex justify-center">
-        <TableContainer sx={{width: 3/4 }}>
-        <Table >
-        {movies.map(movie => (
-            <TableRow> 
-                <TableCell>{movie.movie}</TableCell>
-                <TableCell>{movie.rating}</TableCell>
-            </TableRow>
-          ))}
-        </Table>
+  const fetchCompanies = () => {
+    fetch("http://localhost:5000/companies")
+      .then((response) => response.json())
+      .then((data) => setTableData(data))
+      .catch((error) => console.error("Error:", error));
+  };
+  const fetchParams = () => {
+    fetch("http://localhost:5000/parametres")
+      .then((response) => response.json())
+      .then((data) => setTableData(data))
+      .catch((error) => console.error("Error:", error));
+  };
+  const fetchContacts = () => {
+    fetch("http://localhost:5000/contactPersons")
+      .then((response) => response.json())
+      .then((data) => setTableData(data))
+      .catch((error) => console.error("Error:", error));
+  };
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="w-3/4">
+        <div className="">
+          <ButtonGroup variant="outlined" aria-label="Basic button group">
+            <Button onClick={fetchCompanies}>Предприятия</Button>
+            <Button onClick={fetchParams}>Показатели</Button>
+            <Button onClick={fetchContacts}>Контакные лица</Button>
+          </ButtonGroup>
+        </div>
+        <TableContainer>
+          <Table>
+            {tableData.map((row) => {
+              return (
+                <TableRow key={row.id}>
+                  {Object.values(row).map((value) => (
+                    <TableCell>{value}</TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
+          </Table>
         </TableContainer>
       </div>
-    );
-  };
+    </div>
+  );
+}
 
 export default Dummy;
