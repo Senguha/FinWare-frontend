@@ -7,6 +7,7 @@ function App() {
 
   return (
     <>
+      <h1>КИРИЛЛ СЫН ШЛЮХИ</h1>
       <Dummy/>
     </>
   )
