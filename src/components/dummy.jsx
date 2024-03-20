@@ -8,23 +8,24 @@ import TableContainer from "@mui/material/TableContainer";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
+
 function Dummy() {
   const [tableData, setTableData] = useState([]);
 
   const fetchCompanies = () => {
-    fetch("http://localhost:5000/companies")
+    fetch(import.meta.env.VITE_API_URL+"companies")
       .then((response) => response.json())
       .then((data) => setTableData(data))
       .catch((error) => console.error("Error:", error));
   };
   const fetchParams = () => {
-    fetch("http://localhost:5000/parametres")
+    fetch(import.meta.env.VITE_API_URL+"parametres")
       .then((response) => response.json())
       .then((data) => setTableData(data))
       .catch((error) => console.error("Error:", error));
   };
   const fetchContacts = () => {
-    fetch("http://localhost:5000/contactPersons")
+    fetch(import.meta.env.VITE_API_URL+"contactPersons")
       .then((response) => response.json())
       .then((data) => setTableData(data))
       .catch((error) => console.error("Error:", error));
