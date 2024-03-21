@@ -7,27 +7,37 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-
+import Paper from "@mui/material/Paper";
 
 function Dummy() {
-  const [tableData, setTableData] = useState([]);
+  const [tableRows, setTableRows] = useState([]);
+  const [tableColumns, setTableColumns] = useState([]);
 
   const fetchCompanies = () => {
-    fetch(import.meta.env.VITE_API_URL+"companies")
+    fetch(import.meta.env.VITE_API_URL + "companies")
       .then((response) => response.json())
-      .then((data) => setTableData(data))
+      .then((data) => {
+        setTableRows(data.rows);
+        setTableColumns(data.fields);
+      })
       .catch((error) => console.error("Error:", error));
   };
   const fetchParams = () => {
-    fetch(import.meta.env.VITE_API_URL+"parametres")
+    fetch(import.meta.env.VITE_API_URL + "parametres")
       .then((response) => response.json())
-      .then((data) => setTableData(data))
+      .then((data) => {
+        setTableRows(data.rows);
+        setTableColumns(data.fields);
+      })
       .catch((error) => console.error("Error:", error));
   };
   const fetchContacts = () => {
-    fetch(import.meta.env.VITE_API_URL+"contactPersons")
+    fetch(import.meta.env.VITE_API_URL + "contactPersons")
       .then((response) => response.json())
-      .then((data) => setTableData(data))
+      .then((data) => {
+        setTableRows(data.rows);
+        setTableColumns(data.fields);
+      })
       .catch((error) => console.error("Error:", error));
   };
   useEffect(() => {
@@ -44,17 +54,24 @@ function Dummy() {
             <Button onClick={fetchContacts}>Контакные лица</Button>
           </ButtonGroup>
         </div>
-        <TableContainer>
+        <TableContainer component={Paper}>
           <Table>
-            {tableData.map((row) => {
-              return (
-                <TableRow key={row.id}>
-                  {Object.values(row).map((value) => (
-                    <TableCell>{value}</TableCell>
-                  ))}
-                </TableRow>
-              );
-            })}
+            <TableHead>
+              {tableColumns.map((field) => {
+                return <TableCell>{field.name}</TableCell>;
+              })}
+            </TableHead>
+            <TableBody>
+              {tableRows.map((row) => {
+                return (
+                  <TableRow key={row.id}>
+                    {Object.values(row).map((value) => (
+                      <TableCell>{value}</TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
           </Table>
         </TableContainer>
       </div>
