@@ -13,26 +13,8 @@ function Dummy() {
   const [tableRows, setTableRows] = useState([]);
   const [tableColumns, setTableColumns] = useState([]);
 
-  const fetchCompanies = () => {
-    fetch(import.meta.env.VITE_API_URL + "companies")
-      .then((response) => response.json())
-      .then((data) => {
-        setTableRows(data.rows);
-        setTableColumns(data.fields);
-      })
-      .catch((error) => console.error("Error:", error));
-  };
-  const fetchParams = () => {
-    fetch(import.meta.env.VITE_API_URL + "parametres")
-      .then((response) => response.json())
-      .then((data) => {
-        setTableRows(data.rows);
-        setTableColumns(data.fields);
-      })
-      .catch((error) => console.error("Error:", error));
-  };
-  const fetchContacts = () => {
-    fetch(import.meta.env.VITE_API_URL + "contactPersons")
+  const fetchTable = (tableName) => {
+    fetch(import.meta.env.VITE_API_URL + tableName)
       .then((response) => response.json())
       .then((data) => {
         setTableRows(data.rows);
@@ -41,17 +23,19 @@ function Dummy() {
       .catch((error) => console.error("Error:", error));
   };
   useEffect(() => {
-    fetchCompanies();
+    fetchTable("companies");
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center m-12">
       <div className="w-3/4">
-        <div className="">
+        <div className="mb-6">
           <ButtonGroup variant="outlined" aria-label="Basic button group">
-            <Button onClick={fetchCompanies}>Предприятия</Button>
-            <Button onClick={fetchParams}>Показатели</Button>
-            <Button onClick={fetchContacts}>Контакные лица</Button>
+            <Button onClick={()=> fetchTable("companies")}>Предприятия</Button>
+            <Button onClick={()=> fetchTable("parametres")}>Показатели</Button>
+            <Button onClick={()=> fetchTable("contactPersons")}>Контакные лица</Button>
+            <Button onClick={()=> fetchTable("countries")}>Страны</Button>
+            <Button onClick={()=> fetchTable("reports")}>Отчёты</Button>
           </ButtonGroup>
         </div>
         <TableContainer component={Paper}>
