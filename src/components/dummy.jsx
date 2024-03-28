@@ -36,6 +36,7 @@ function Dummy() {
             <Button onClick={()=> fetchTable("contactPersons")}>Контакные лица</Button>
             <Button onClick={()=> fetchTable("countries")}>Страны</Button>
             <Button onClick={()=> fetchTable("reports")}>Отчёты</Button>
+            <Button onClick={()=> fetchTable("users")}>Пользователи</Button>
           </ButtonGroup>
         </div>
         <TableContainer component={Paper}>
