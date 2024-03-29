@@ -33,6 +33,7 @@ function Dummy() {
           <ButtonGroup variant="outlined" aria-label="Basic button group">
             <Button onClick={()=> fetchTable("companies")}>Предприятия</Button>
             <Button onClick={()=> fetchTable("parametres")}>Показатели</Button>
+            <Button onClick={()=> fetchTable("parameteresTypes")}>Виды показателей</Button>
             <Button onClick={()=> fetchTable("contactPersons")}>Контакные лица</Button>
             <Button onClick={()=> fetchTable("countries")}>Страны</Button>
             <Button onClick={()=> fetchTable("reports")}>Отчёты</Button>
