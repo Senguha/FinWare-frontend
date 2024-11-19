@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "./ui/passwordInput";
 
 const formSchema = z
   .object({
@@ -24,12 +25,18 @@ const formSchema = z
         message: "Логин должен содержать не менее 1 символа",
       })
       .max(20, { message: "Логин не должен превышать 20 символов" }),
-    password: z.string().min(1, {
-      message: "Пароль должен содержать не менее 1 символа",
-    }),
-    confirmPassword: z.string().min(1, {
-      message: "Пароль должен содержать не менее 1 символа",
-    }),
+    password: z
+      .string()
+      .min(1, {
+        message: "Пароль должен содержать не менее 1 символа",
+      })
+      .max(20, { message: "Логин не должен превышать 20 символов" }),
+    confirmPassword: z
+      .string()
+      .min(1, {
+        message: "Пароль должен содержать не менее 1 символа",
+      })
+      .max(20, { message: "Пароль не должен превышать 20 символов" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Пароли не совпадают!",
@@ -51,9 +58,9 @@ function RegistrationForm() {
   const { toast } = useToast();
 
   const onSubmit = async (values) => {
-    setLoading(true)
+    setLoading(true);
     console.log(values);
-    
+
     axios
       .post(import.meta.env.VITE_API_URL + "users/register", {
         login: values.login,
@@ -73,7 +80,7 @@ function RegistrationForm() {
           description: err.response.data,
         })
       );
-      setLoading(false)
+    setLoading(false);
   };
 
   return (
@@ -99,7 +106,7 @@ function RegistrationForm() {
             <FormItem>
               <FormLabel>Пароль</FormLabel>
               <FormControl>
-                <Input placeholder="Password" {...field}></Input>
+                <PasswordInput placeholder="Password" {...field}></PasswordInput>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -112,7 +119,7 @@ function RegistrationForm() {
             <FormItem>
               <FormLabel>Повтор пароля</FormLabel>
               <FormControl>
-                <Input placeholder="Password" {...field}></Input>
+                <PasswordInput placeholder="Password" {...field}></PasswordInput>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -129,4 +136,3 @@ function RegistrationForm() {
 }
 
 export { RegistrationForm };
-
