@@ -1,25 +1,20 @@
-import { useState } from 'react'
-import './App.css'
-import Dummy from './components/dummy'
-import Navbar from './components/navbar'
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import "./App.css";
+import Navbar from "./components/navbar";
+import { Toaster } from "./components/ui/toaster";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+const queryClient = new QueryClient();
+
 function App() {
-
   return (
-    <>
-    <ThemeProvider theme={darkTheme}>
-      <Navbar/>
-      <Dummy/>
-    </ThemeProvider>
-      
-    </>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Navbar />
+      <Toaster />
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
