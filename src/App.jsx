@@ -1,5 +1,6 @@
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./App.css";
-import Navbar from "./components/navbar";
+import Router from "./components/Routes/router";
 import { Toaster } from "./components/ui/toaster";
 
 import {
@@ -11,8 +12,9 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Navbar />
+      <Router/>
       <Toaster />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }

@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { PasswordInput } from "./ui/passwordInput";
+import { PasswordInput } from "../../../ui/passwordInput";
 
 const formSchema = z
   .object({

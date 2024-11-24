@@ -1,5 +1,5 @@
-import { Card, CardContent } from "./ui/card";
-import { BadgeDollarSign, CircleUserRound, LogIn, User, Settings, LogOut } from "lucide-react";
+import { Card, CardContent } from "../../../ui/card";
+import { BadgeDollarSign, CircleUserRound, LogIn, User, Settings, LogOut} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,12 +14,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { LoginForm } from "@/components/LoginForm";
-import { RegistrationForm } from "@/components/RegistrationForm";
+import { LoginForm } from "@/components/Routes/Layout/navbar/LoginForm";
+import { RegistrationForm } from "@/components/Routes/Layout/navbar/RegistrationForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthStore } from "@/stores/zustand";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const { toast } = useToast();
@@ -41,7 +42,7 @@ function Navbar() {
   };
 
   return (
-    <header className="m-2">
+    <header className="m-4">
       <Card>
         <CardContent className="py-2 px-4 flex">
           <nav className="font-medium text-lg flex items-center w-full md:justify-normal justify-between">
@@ -49,9 +50,9 @@ function Navbar() {
               <BadgeDollarSign size={48} />
               <span className="font-bold sr-only md:not-sr-only">FinWare</span>
             </div>
-            <div className="flex gap-8">
-              <span>Главная</span>
-              <span>Предприятия</span>
+            <div className="flex gap-4">
+              <Link to={"/"} className="hover:bg-accent rounded-lg py-2 px-4" >Главная</Link>
+              <Link to={"/companies"} className="hover:bg-accent rounded-lg py-2 px-4">Предприятия</Link>
             </div>
             <div className="md:ml-auto">
               <Dialog>
@@ -61,7 +62,7 @@ function Navbar() {
                     className="flex gap-2 hover:bg-accent"
                   >
                     <div className="py-2 px-2 rounded-lg">
-                      {login && <span>{login}</span>}
+                      {login && <span className="sr-only md:not-sr-only">{login}</span>}
                       <CircleUserRound size={32} />
                     </div>
                   </DropdownMenuTrigger>
