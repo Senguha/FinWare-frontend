@@ -104,45 +104,44 @@ function CompanyDetailsPage() {
             </Card>
             {companyData.contact_persons && (
               <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <User className="h-5 w-5" />
-                  Контактное лицо
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {companyData.contact_persons && (
-                  <dl className="space-y-2">
-                    <div>
-                      <dt className="font-semibold">ФИО:</dt>
-                      <dd>
-                        {companyData.contact_persons.last_name}{" "}
-                        {companyData.contact_persons.first_name}{" "}
-                        {companyData.contact_persons.middle_name}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="font-semibold">Должность:</dt>
-                      <dd>{companyData.contact_persons.position}</dd>
-                    </div>
-                    <div>
-                      <dt className="font-semibold">Телефон:</dt>
-                      <dd className="flex items-center gap-1">
-                        <Phone className="h-4 w-4" />
-                        <a
-                          href={`tel:+${companyData.contact_persons.phone_number}`}
-                          className="hover:underline"
-                        >
-                          +{companyData.contact_persons.phone_number}
-                        </a>
-                      </dd>
-                    </div>
-                  </dl>
-                )}
-              </CardContent>
-            </Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <User className="h-5 w-5" />
+                    Контактное лицо
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {companyData.contact_persons && (
+                    <dl className="space-y-2">
+                      <div>
+                        <dt className="font-semibold">ФИО:</dt>
+                        <dd>
+                          {companyData.contact_persons.last_name}{" "}
+                          {companyData.contact_persons.first_name}{" "}
+                          {companyData.contact_persons.middle_name}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="font-semibold">Должность:</dt>
+                        <dd>{companyData.contact_persons.position}</dd>
+                      </div>
+                      <div>
+                        <dt className="font-semibold">Телефон:</dt>
+                        <dd className="flex items-center gap-1">
+                          <Phone className="h-4 w-4" />
+                          <a
+                            href={`tel:+${companyData.contact_persons.phone_number}`}
+                            className="hover:underline"
+                          >
+                            +{companyData.contact_persons.phone_number}
+                          </a>
+                        </dd>
+                      </div>
+                    </dl>
+                  )}
+                </CardContent>
+              </Card>
             )}
-            
           </div>
 
           <h1 className="text-3xl font-bold mb-6">Финансовая отчётность</h1>
@@ -153,39 +152,39 @@ function CompanyDetailsPage() {
                 className="animate-spin py-10 min-h-[calc(100dvh-82px)]"
               />
             )}
-            {!isPendingReps &&  (
-              reportData.length === 0 ? (
+            {!isPendingReps &&
+              (reportData.length === 0 ? (
                 <p className="font-medium text-lg text-center text-muted-foreground m-8">
                   Отчёты не найдены
                 </p>
               ) : (
-              reportData.map((report) => (
-                <Accordion key={report.id} type="multiple">
-                  <AccordionItem
-                    value={"item" + report.id}
-                    className="rounded-md border shadow-sm px-6"
-                  >
-                    <AccordionTrigger>
-                      <span className="text-lg text-">
-                        Отчёт от:
-                        {" " +
-                          new Date(
-                            Date.parse(report.created_at)
-                          ).toLocaleDateString(undefined, {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                      </span>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ReportTable ListId={report.id} />
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ))
-            ))}
+                reportData.map((report) => (
+                  <Accordion key={report.id} type="multiple">
+                    <AccordionItem
+                      value={"item" + report.id}
+                      className="rounded-md border shadow-sm px-6"
+                    >
+                      <AccordionTrigger>
+                        <span className="text-lg text-">
+                          Отчёт от:
+                          {" " +
+                            new Date(
+                              Date.parse(report.created_at)
+                            ).toLocaleDateString(undefined, {
+                              weekday: "long",
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ReportTable ListId={report.id} />
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                ))
+              ))}
           </div>
         </div>
       )}
