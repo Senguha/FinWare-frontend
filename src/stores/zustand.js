@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 
 const initialState = {
   login: "",
+  id: "",
   is_admin: false,
   created_at: "",
 };

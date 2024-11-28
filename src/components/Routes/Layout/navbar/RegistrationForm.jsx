@@ -1,10 +1,9 @@
-import  { useState } from "react";
+import { useState, useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "../../../ui/passwordInput";
+import { DialogClose } from "@/components/ui/dialog";
 
 const formSchema = z
   .object({
@@ -54,6 +54,7 @@ function RegistrationForm() {
   });
 
   const [isLoading, setLoading] = useState(false);
+  const closeRef = useRef()
 
   const { toast } = useToast();
 
@@ -62,16 +63,21 @@ function RegistrationForm() {
     console.log(values);
 
     axios
-      .post(import.meta.env.VITE_API_URL + "users/register", {
-        login: values.login,
-        password: values.password,
-      })
+      .post(
+        import.meta.env.VITE_API_URL + "users/register",
+        {
+          login: values.login,
+          password: values.password,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
         toast({
           title: "Ваш аккаунт был успешно создан!",
           description: "Добро пожаловать, " + res.data.login,
         });
         console.log(res);
+        closeRef.current.click()
       })
       .catch((err) =>
         toast({
@@ -106,7 +112,10 @@ function RegistrationForm() {
             <FormItem>
               <FormLabel>Пароль</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="Password" {...field}></PasswordInput>
+                <PasswordInput
+                  placeholder="Password"
+                  {...field}
+                ></PasswordInput>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -119,7 +128,10 @@ function RegistrationForm() {
             <FormItem>
               <FormLabel>Повтор пароля</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="Password" {...field}></PasswordInput>
+                <PasswordInput
+                  placeholder="Password"
+                  {...field}
+                ></PasswordInput>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -129,6 +141,9 @@ function RegistrationForm() {
           <Button type="submit" className="ml-auto" disabled={isLoading}>
             Создать аккаунт
           </Button>
+          <DialogClose asChild>
+            <Button className="sr-only" ref={closeRef}>Close</Button>
+          </DialogClose>
         </div>
       </form>
     </Form>

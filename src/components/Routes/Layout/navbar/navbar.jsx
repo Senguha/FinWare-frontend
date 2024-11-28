@@ -21,8 +21,8 @@ import { useAuthStore } from "@/stores/zustand";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
-
 function Navbar() {
+  
   const { toast } = useToast();
 
   const login = useAuthStore((state) => state.login);
@@ -30,7 +30,7 @@ function Navbar() {
 
   const logout = async () => {
     axios
-      .get(import.meta.env.VITE_API_URL + "users/logout")
+      .get(import.meta.env.VITE_API_URL + "users/logout", {withCredentials:true})
       .then(resetUser())
       .catch((err) => {
         toast({
@@ -75,8 +75,8 @@ function Navbar() {
                       </DialogTrigger>
                     ) : (
                       <>
-                        <DropdownMenuItem><User/><span>Личный кабинет</span></DropdownMenuItem>
-                        <DropdownMenuItem><Settings/><span>Настройки</span></DropdownMenuItem>
+                        <Link to={"/profile"}><DropdownMenuItem><User/><span>Личный кабинет</span></DropdownMenuItem></Link>
+                        <Link to={"/settings"}><DropdownMenuItem><Settings/><span>Настройки</span></DropdownMenuItem></Link>
                         <DropdownMenuItem onClick={() => logout()}>
                         <LogOut/><span> Выйти</span>
                         </DropdownMenuItem>
@@ -85,7 +85,7 @@ function Navbar() {
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <DialogTitle className="sr-only" />
-                <DialogContent>
+                <DialogContent className="pt-12">
                   <Tabs defaultValue="login">
                     <TabsList className="grid w-full grid-cols-2">
                       <TabsTrigger value="login">Вход в систему</TabsTrigger>
@@ -94,10 +94,10 @@ function Navbar() {
                       </TabsTrigger>
                     </TabsList>
                     <TabsContent value="login">
-                      <LoginForm />
+                      <LoginForm/>
                     </TabsContent>
                     <TabsContent value="registration">
-                      <RegistrationForm />
+                      <RegistrationForm/>
                     </TabsContent>
                   </Tabs>
                 </DialogContent>

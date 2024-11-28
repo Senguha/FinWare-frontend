@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, Building2, LoaderCircle } from "lucide-react";
+import { Search, Building2, LoaderCircle,} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,19 +14,27 @@ import { ArrowUpDown } from "lucide-react";
 import { formatRubles } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components/ui/separator"
 import { Link } from "react-router-dom";
+import { useAuthStore } from "@/stores/zustand";
+import AddCompDialog from "./AddCompDialog";
+import EditCompDialog from "./EditCompDialog";
+import DelCompDialog from "./DelCompDialog";
+import ReportSheet from "./ReportSheet";
 
-export default function CompanyListPage() {
+export default function UserCompanyListPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortColumn, setSortColumn] = useState("title");
   const [sortDirection, setSortDirection] = useState("asc");
+  const userId = useAuthStore((state)=> state.id)
 
   const { data: companies, isPending } = useQuery({
-    queryKey: ["companies"],
+    queryKey: ["companies", "user", userId ],
     queryFn: async () => {
       const { data } = await axios.get(
-        import.meta.env.VITE_API_URL + "companies"
+        import.meta.env.VITE_API_URL + "companies/user/"+userId,{
+          withCredentials: true,
+        }
       );
       return data;
     },
@@ -70,9 +78,9 @@ export default function CompanyListPage() {
   return (
     <div className="container mx-auto py-10 min-h-[calc(100dvh-82px)]">
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 pb-3 mb-12">
-        <h1 className="text-3xl font-bold mb-2 ">Предприятия</h1>
+        <div className="text-3xl font-bold mb-2 flex gap-4">Мои предприятия</div>
         <p className="text-muted-foreground">
-          Просматривайте предприятия использующие услуги FinWare
+          Просматривайте управляемые вами предприятия
         </p>
         <Separator className="my-4" />
         <div className="flex sm:flex-row gap-4 ">
@@ -118,12 +126,18 @@ export default function CompanyListPage() {
         </div>
       </div>
 
+      <div className="flex gap-2 my-4">
+        <Separator className="my-4 w-[45%] ml-auto" />
+                <AddCompDialog/>
+        <Separator className="my-4 w-[45%] mr-auto" />
+      </div>
+
       {isPending && (
         <div className="flex justify-center">
           <LoaderCircle size={64} className="animate-spin" />
         </div>
       )}
-      {!isPending &&
+            {!isPending &&
         (sortedAndFilteredCompanies.length === 0) ? (
           <p className="text-center font-medium text-2xl text-muted-foreground mt-8">
             Предприятия не найдены
@@ -131,14 +145,15 @@ export default function CompanyListPage() {
         ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {sortedAndFilteredCompanies.map((company)=> (
-            <Link to={`/companies/${company.id}`} key={company.id}>
-              <Card key={company.id} className="flex flex-col">
+              <Card key={company.id} className="flex flex-col relative">
+                <Link to={`/companies/${company.id}`} key={company.id}>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Building2 className="h-5 w-5" />
                     {company.title}
                   </CardTitle>
                 </CardHeader>
+                </Link>
                 <CardContent className="flex-grow flex flex-col justify-between">
                   <p className="text-sm text-muted-foreground mb-1">
                     {company.city}, {company.countries.title}
@@ -149,12 +164,15 @@ export default function CompanyListPage() {
                       company.report_lists[0]?.reports[0].param_value
                     )}
                   </p>
+                  <EditCompDialog id={company.id}/>
+                  <DelCompDialog id={company.id}/>
+                  <ReportSheet id={company.id}/>
                 </CardContent>
               </Card>
-            </Link>
+
             ),)}
           </div>
         )}
     </div>
-  )
+  );
 }
