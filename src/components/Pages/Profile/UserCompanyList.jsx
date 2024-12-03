@@ -17,9 +17,9 @@ import axios from "axios";
 import { Separator } from "@/components/ui/separator"
 import { Link } from "react-router-dom";
 import { useAuthStore } from "@/stores/zustand";
-import AddCompDialog from "./AddCompDialog";
-import EditCompDialog from "./EditCompDialog";
-import DelCompDialog from "./DelCompDialog";
+import AddCompDialog from "./Companies Forms/AddCompDialog";
+import EditCompDialog from "./Companies Forms/EditCompDialog";
+import DelCompDialog from "./Companies Forms/DelCompDialog";
 import ReportSheet from "./ReportSheet";
 
 export default function UserCompanyListPage() {

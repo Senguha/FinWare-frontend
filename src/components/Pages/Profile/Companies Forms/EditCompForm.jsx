@@ -28,9 +28,8 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { ChevronsUpDown, Check, LoaderCircle } from "lucide-react";
+import { ChevronsUpDown, Check} from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import { Switch } from "@/components/ui/switch";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -154,29 +153,12 @@ const formSchema = z.discriminatedUnion("contact", [
   }),
 ]);
 
-function EditForm({id}) {
+function EditForm({id, countries, companyData}) {
   
   const queryClient = useQueryClient();
   
-  const { data: countries, isPending } = useQuery({
-    queryKey: ["countries"],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        import.meta.env.VITE_API_URL + "countries"
-      );
-      return data;
-    },
-  });
 
-  const { data: companyData, isPendingComp } = useQuery({
-    queryKey: ["company", id],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        import.meta.env.VITE_API_URL + "companies/" + id
-      );
-      return data;
-    },
-  });
+
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -229,15 +211,6 @@ function EditForm({id}) {
 
   return (
   <>
-  {isPendingComp && (
-    <div className="flex justify-center">
-      <LoaderCircle
-        size={64}
-        className="animate-spin py-10"
-      />
-    </div>
-  )}
-  {!isPendingComp && (
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField
@@ -275,12 +248,7 @@ function EditForm({id}) {
               </FormItem>
             )}
           />
-          {isPending && (
-            <div className="flex justify-center">
-              <LoaderCircle size={24} className="animate-spin" />
-            </div>
-          )}
-          {!isPending && (
+
             <FormField
               control={form.control}
               name="country"
@@ -341,7 +309,6 @@ function EditForm({id}) {
                 </FormItem>
               )}
             />
-          )}
           <FormField
             control={form.control}
             name="city"
@@ -495,7 +462,6 @@ function EditForm({id}) {
           </div>
         </form>
       </Form>
-  )}
   </>
 
   )

@@ -15,8 +15,10 @@ import AddForm from "./AddCompForm";
       <DialogTitle>Добавить предприятие</DialogTitle>
       <DialogDescription>Добавьте новое предприятие и начните вести финансовую отчётность</DialogDescription>
     </DialogHeader>
-    <ScrollArea className='p-4'>
+    <ScrollArea>
+    <div className="m-4">
         <AddForm/>
+        </div>
     </ScrollArea>   
     </DialogContent>
     </Dialog>

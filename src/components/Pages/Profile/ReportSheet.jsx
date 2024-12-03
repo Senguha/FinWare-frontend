@@ -13,7 +13,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trash2 } from "lucide-react";
-import ReportEditDialog from "./ReportEditDialog";
+import ReportEditDialog from "./Reports Forms/ReportEditDialog";
+import AddReportDialog from "./Reports Forms/AddReportDialog";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import ReportDelDialog from "./Reports Forms/ReportDelDialog";
 
 function ReportSheet({ id }) {
   const { data: reportData, isPending: isPendingReps } = useQuery({
@@ -37,10 +41,10 @@ function ReportSheet({ id }) {
         <SheetHeader>
           <SheetTitle>Отчётность предприятия</SheetTitle>
           <SheetDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Добавляйте, изменяйте и удаляйте отчётности о бухгалтерском балансе предприятия.
           </SheetDescription>
         </SheetHeader>
+        <ScrollArea>
         {isPendingReps && (
           <LoaderCircle
             size={64}
@@ -49,31 +53,42 @@ function ReportSheet({ id }) {
         )}
         {!isPendingReps &&
           (reportData.length === 0 ? (
-            <p className="font-medium text-lg text-center text-muted-foreground m-8">
-              Отчёты не найдены
-            </p>
+            <>
+              <div className="flex gap-2 my-2">
+                <Separator className="my-4 w-[40%] ml-auto" />
+                <AddReportDialog compId={id} />
+                <Separator className="my-4 w-[40%] mr-auto" />
+              </div>
+              <p className="font-medium text-lg text-center text-muted-foreground m-8">
+                Отчёты не найдены
+              </p>
+            </>
           ) : (
-            reportData.map((report) => (
-              <Card key={report.id}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <div className="mr-auto">
-                    {new Date(
-                      Date.parse(report.created_at)
-                    ).toLocaleDateString()}
-                    </div>
-                    
-                    <ReportEditDialog id={report.id}/>
-                    <Trash2
-                      color="#64748b"
-                      size={28}
-                      className="p-1 hover:bg-accent rounded-sm"
-                    />
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-            ))
+            <>
+              <div className="flex gap-2 my-2">
+                <Separator className="my-4 w-[40%] ml-auto" />
+                <AddReportDialog compId={id} />
+                <Separator className="my-4 w-[40%] mr-auto" />
+              </div>
+              {reportData.map((report) => (
+                <Card key={report.id}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <div className="mr-auto">
+                        {new Date(
+                          Date.parse(report.created_at)
+                        ).toLocaleDateString(undefined, {  year: "numeric", month: "long", day: "numeric" })}
+                      </div>
+                      <ReportEditDialog id={report.id} compId={id} date={report.created_at}/>
+                      <ReportDelDialog id={report.id} compId={id} />
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              ))}
+            </>
           ))}
+        </ScrollArea>
+        
       </SheetContent>
     </Sheet>
   );
