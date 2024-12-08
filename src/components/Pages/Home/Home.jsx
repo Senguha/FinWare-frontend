@@ -8,7 +8,7 @@ export default function HomePage() {
 
   return (
       <>  
-      <main className="flex-grow">
+      <main className="flex-grow min-h-[calc(100dvh-82px)]">
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">Финансовая отчетность для вашего бизнеса</h2>
