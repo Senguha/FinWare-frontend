@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import ReportTable from "./ReportTable";
 import { Separator } from "../../ui/separator";
+import { CompanyChart } from "./CompanyChart";
 
 // const companyData = {
 //   "id": "1",
@@ -154,8 +155,13 @@ function CompanyDetailsPage() {
             )}
           </div>
 
-          <h1 className="text-3xl font-bold mb-6">Финансовая отчётность</h1>
+          
           <div className="rounded-lg border bg-card text-card-foreground shadow-md p-6 mb-12 flex flex-col gap-6">
+          
+          <h1 className="text-3xl font-bold">Финансовая отчётность</h1>
+          <Separator />
+          <CompanyChart compId={id}/>  
+          
             {isPendingReps && (
               <LoaderCircle
                 size={64}

@@ -18,6 +18,7 @@ import AddReportDialog from "./Reports Forms/AddReportDialog";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ReportDelDialog from "./Reports Forms/ReportDelDialog";
+import ExportReportButton from "./Reports Forms/ExportReportButton";
 
 function ReportSheet({ id }) {
   const { data: reportData, isPending: isPendingReps } = useQuery({
@@ -65,11 +66,11 @@ function ReportSheet({ id }) {
             </>
           ) : (
             <>
-              <div className="flex gap-2 my-2">
-                <Separator className="my-4 w-[40%] ml-auto" />
+              <div className="flex mt-2 bg-card rounded-md p-2 w-fit border shadow-sm">
                 <AddReportDialog compId={id} />
-                <Separator className="my-4 w-[40%] mr-auto" />
+                <ExportReportButton compId={id} />
               </div>
+              <Separator className="my-4" />
               {reportData.map((report) => (
                 <Card key={report.id}>
                   <CardHeader>

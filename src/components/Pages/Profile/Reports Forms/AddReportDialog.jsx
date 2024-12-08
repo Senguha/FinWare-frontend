@@ -1,4 +1,4 @@
-import { CirclePlus} from "lucide-react";
+import { ClipboardPlus} from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ReportAddForm from "./ReportAddForm"
@@ -10,7 +10,7 @@ import ReportAddForm from "./ReportAddForm"
     return (
     <Dialog>
     <DialogTrigger>
-        <CirclePlus color="#64748b" size={28} className="min-w-10 h-10 p-1 hover:bg-muted rounded-md mx-auto" />
+        <ClipboardPlus color="#64748b" size={28} className="min-w-10 h-10 p-1 hover:bg-muted rounded-md" />
     </DialogTrigger>  
     <DialogContent className='h-[70%] p-4'>
     <DialogHeader>

@@ -132,7 +132,7 @@ export default function CompanyListPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {sortedAndFilteredCompanies.map((company)=> (
             <Link to={`/companies/${company.id}`} key={company.id}>
-              <Card key={company.id} className="flex flex-col">
+              <Card key={company.id} className="flex flex-col ">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Building2 className="h-5 w-5" />
