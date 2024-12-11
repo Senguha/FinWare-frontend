@@ -232,7 +232,7 @@ function ReportAddForm({ compId }) {
           name="param2"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Основные средства</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -254,7 +254,7 @@ function ReportAddForm({ compId }) {
           name="param3"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Незавершенное строительство</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -276,7 +276,7 @@ function ReportAddForm({ compId }) {
           name="param4"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Долгосрочные финансовые вложения</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -298,7 +298,7 @@ function ReportAddForm({ compId }) {
           name="param5"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Отложенные налоговые активы</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -320,7 +320,7 @@ function ReportAddForm({ compId }) {
           name="param6"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Оборотные активы</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -342,7 +342,7 @@ function ReportAddForm({ compId }) {
           name="param7"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Запасы</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -364,7 +364,7 @@ function ReportAddForm({ compId }) {
           name="param8"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>НДС</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -386,7 +386,7 @@ function ReportAddForm({ compId }) {
           name="param9"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Дебиторская задолженность</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -408,7 +408,7 @@ function ReportAddForm({ compId }) {
           name="param10"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Краткосрочные финансовые вложения</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -430,7 +430,7 @@ function ReportAddForm({ compId }) {
           name="param11"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Денежные средства</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -452,7 +452,7 @@ function ReportAddForm({ compId }) {
           name="param12"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Собственный капитал</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -474,7 +474,7 @@ function ReportAddForm({ compId }) {
           name="param13"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Долгосрочные обязательства</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -496,7 +496,7 @@ function ReportAddForm({ compId }) {
           name="param14"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Заемные средства</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -518,7 +518,7 @@ function ReportAddForm({ compId }) {
           name="param15"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Кредиторская задолженность</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -540,7 +540,7 @@ function ReportAddForm({ compId }) {
           name="param16"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Внеоборотные активы</FormLabel>
+              <FormLabel>Резервы предстоящих расходов</FormLabel>
               <FormControl>
                 <Input
                   type="text"

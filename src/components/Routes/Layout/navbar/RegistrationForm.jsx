@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "../../../ui/passwordInput";
 import { DialogClose } from "@/components/ui/dialog";
+import { useAuthStore } from "@/stores/zustand";
 
 const formSchema = z
   .object({
@@ -57,6 +58,7 @@ function RegistrationForm() {
   const closeRef = useRef()
 
   const { toast } = useToast();
+  const setUser = useAuthStore((state) => state.setUser);
 
   const onSubmit = async (values) => {
     setLoading(true);
@@ -72,6 +74,7 @@ function RegistrationForm() {
         { withCredentials: true }
       )
       .then((res) => {
+        setUser(res.data);
         toast({
           title: "Ваш аккаунт был успешно создан!",
           description: "Добро пожаловать, " + res.data.login,

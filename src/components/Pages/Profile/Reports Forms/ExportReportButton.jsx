@@ -39,7 +39,7 @@ function ExportReportButton({ compId }) {
       const ws = utils.json_to_sheet(sheetData); 
       const wb = utils.book_new();  
       utils.book_append_sheet(wb, ws, 'Sheet1');  
-      writeFileXLSX(wb, 'test.xlsx');
+      writeFileXLSX(wb, `Отчёт компании ${data[0].companies.title}.xlsx`);
   }
 
   return (
